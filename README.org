@@ -4,3 +4,54 @@
 [[gif.gif]]
 
 ** Day 20
+ - Stacks: vertical, horizontal and z axis
+ - The Color view: Color.red. To use it as a background color, use a ZStack:
+#+BEGIN_SRC Swift
+ZStack {
+    Color.gray.edgesIgnoringSafeArea(.all)
+    VStack { }
+}
+#+END_SRC
+ - Color view's frame modifier
+#+BEGIN_SRC Swift
+Color.blue.frame(width: 20, height: 20)
+#+END_SRC
+ - Custom color for the Color view
+#+BEGIN_SRC Swift
+Color(red: 1, green: 0.8, blue: 0, opacity: 0.9)
+#+END_SRC
+ - Gradient views 
+#+BEGIN_SRC Swift
+LinearGradient(gradient: Gradient(colors: [Color.white, Color.gray]), startPoint: .top, endPoint: .bottom)
+RadialGradient(gradient: Gradient(colors: [Color.gray, Color.white]), center: .top, startRadius: 20, endRadius: 400).edgesIgnoringSafeArea(.all)
+AngularGradient(gradient: Gradient(colors: [Color.white, Color.black]), center: .topTrailing).edgesIgnoringSafeArea(.all)
+#+END_SRC
+ - Buttons & Image with the systemName initializer - using SF Symbols eg (systemName: "pencil") 
+#+BEGIN_SRC Swift
+Button(action: { print("hit") }) {
+                    HStack {
+                        Image(systemName: "pencil")
+                        Text("Edit")
+                    }
+}
+#+END_SRC
+ - Alerts need a @State variable to track when they are shown
+#+BEGIN_SRC Swift
+struct ContentView: View {
+    @State private var showingAlert = false
+    
+    var body: some View {
+
+    Button(action: {
+                    self.showingAlert = true
+                }) {
+                    HStack {
+                        Image(systemName: "pencil.circle")
+                        Text("Edit")
+                    }
+                }.alert(isPresented: $showingAlert) {
+                    Alert(title: Text("Edit Mode"), message: Text("You have entered edit mode."), dismissButton: .default(Text("OK")))
+                }
+    }
+}
+#+END_SRC
