@@ -1,0 +1,6 @@
+* GuessTheFlag
+*A simple SwuiftUI game to learn flags.*
+
+[[gif.gif]]
+
+** Day 20
