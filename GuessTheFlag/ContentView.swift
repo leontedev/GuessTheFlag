@@ -9,49 +9,59 @@
 import SwiftUI
 
 struct ContentView: View {
-    let size: CGFloat = 60
-    @State private var showingAlert = false
+    @State private var countries = ["Estonia", "France", "Germany", "Ireland", "Italy", "Nigeria", "Poland", "Spain", "UK", "US"].shuffled()
+    @State private var correctAnswer = Int.random(in: 0...2)
+    @State private var showingScore = false
+    @State private var scoreTitle = ""
     
     var body: some View {
-        
-        
         ZStack {
-            //Color.gray.edgesIgnoringSafeArea(.all)
-            //LinearGradient(gradient: Gradient(colors: [Color.white, Color.gray]), startPoint: .top, endPoint: .bottom).edgesIgnoringSafeArea(.all)
-            //RadialGradient(gradient: Gradient(colors: [Color.gray, Color.white]), center: .top, startRadius: 20, endRadius: 400).edgesIgnoringSafeArea(.all)
-            AngularGradient(gradient: Gradient(colors: [Color.white, Color.black]), center: .topTrailing).edgesIgnoringSafeArea(.all)
-
-            VStack {
+            //Color.blue.edgesIgnoringSafeArea(.all)
+            LinearGradient(gradient: Gradient(colors: [Color.blue, Color.black]), startPoint: .top, endPoint: .bottom).edgesIgnoringSafeArea(.all)
+            
+            VStack(spacing: 30) {
+                VStack {
+                    Text("Tap the flag of")
+                        .foregroundColor(.white)
+                    
+                    Text(countries[correctAnswer])
+                        .foregroundColor(.white)
+                        .font(.largeTitle)
+                        .fontWeight(.black)
+                }
                 
-                
-                Button(action: {
-                    self.showingAlert = true
-                }) {
-                    HStack {
-                        Image(systemName: "pencil.circle")
-                        Text("Edit")
+                ForEach(0 ..< 3) { number in
+                    Button(action: {
+                        self.flagTapped(number)
+                    }) {
+                        Image(self.countries[number])
+                            .renderingMode(.original)
+                            .clipShape(Capsule())
+                            .overlay(Capsule().stroke(Color.black, lineWidth: 1))
+                            .shadow(color: .black, radius: 2)
                     }
-                }.alert(isPresented: $showingAlert) { 
-                    Alert(title: Text("Edit Mode"), message: Text("You have entered edit mode."), dismissButton: .default(Text("OK")))
                 }
                 
-                HStack {
-                    Color(red: 1, green: 0.8, blue: 0, opacity: 0.3).frame(width: size, height: size)
-                    Color.blue.frame(width: size, height: size)
-                    Color.blue.frame(width: size, height: size)
-                }
-                HStack {
-                    Color.blue.frame(width: size, height: size)
-                    Color.blue.frame(width: size, height: size)
-                    Color.blue.frame(width: size, height: size)
-                }
-                HStack {
-                    Color.blue.frame(width: size, height: size)
-                    Color.blue.frame(width: size, height: size)
-                    Color.blue.frame(width: size, height: size)
-                }
+                Spacer()
             }
+        }.alert(isPresented: $showingScore) { () -> Alert in
+            Alert(title: Text(scoreTitle), message: Text("Your score is ??"), dismissButton: .default(Text("Continue")) { self.askQuestion() })
         }
+    }
+    
+    func flagTapped(_ number: Int) {
+        if number == correctAnswer {
+            scoreTitle = "Correct"
+        } else {
+            scoreTitle = "Wrong"
+        }
+        
+        showingScore = true
+    }
+    
+    func askQuestion() {
+        countries.shuffle()
+        correctAnswer = Int.random(in: 0...2)
     }
 }
 

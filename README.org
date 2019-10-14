@@ -55,3 +55,16 @@ struct ContentView: View {
     }
 }
 #+END_SRC
+** Day 21
+ - Completion handler on Alert
+#+BEGIN_SRC Swift
+Alert(title: Text(scoreTitle), message: Text("Your score is ??"), dismissButton: .default(Text("Continue")) { self.askQuestion() })
+#+END_SRC
+ - .clipShape(Shape) modifier
+#+BEGIN_SRC Swift
+Image(self.countries[number])
+                            .renderingMode(.original)
+                            .clipShape(Capsule())
+                            .overlay(Capsule().stroke(Color.black, lineWidth: 1))
+                            .shadow(color: .black, radius: 2)
+#+END_SRC
