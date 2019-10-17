@@ -72,3 +72,22 @@ Image(self.countries[number])
 1. Add an @State property to store the user’s score, modify it when they get an answer right or wrong, then display it in the alert.
 2. Show the player’s current score in a label directly below the flags.
 3. When someone chooses the wrong flag, tell them their mistake in your alert message – something like “Wrong! That’s the flag of France,” for example.
+** Day 24 - Challenge 3
+#+BEGIN_QUOTE
+Go back to project 2 and create a FlagImage() view that renders one flag image using the specific set of modifiers we had.
+#+END_QUOTE
+For the full list of Code Actions to appear (on cmd + click on the view), the Canvas has to be enabled.
+I used the *Extract Subview* Code Action, however I had to add a string property to the View, to pass the country name.
+#+BEGIN_SRC Swift
+struct FlagImage: View {
+    var country: String
+    
+    var body: some View {
+        Image(country)
+            .renderingMode(.original)
+            .clipShape(Capsule())
+            .overlay(Capsule().stroke(Color.black, lineWidth: 1))
+            .shadow(color: .black, radius: 2)
+    }
+}
+#+END_SRC
