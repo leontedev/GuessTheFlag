@@ -130,5 +130,8 @@ isFlipAnimated = [false, false, false]
 #+END_SRC
 
 *** 2. A similar solution to make the other 2 buttons opaque, but I'm tracking the state in a different array.
-*** 3. For free, I've decided to hide the incorrect flags and leave the correct answer to be displayed.
-   
+*** 3. For the final challenge, I've decided to hide the incorrect flags and leave the correct answer to be displayed.
+Again, I'm using a third @State variable to track the required state. And if the wrong flag is selected, the two incorrect flags are going to be updated with the .opacity view modifier.
+#+BEGIN_SRC Swift
+.opacity(self.isOpacityAnimated[number] ? (self.isWrongAnswer ? 0 : 0.25) : 1)
+#+END_SRC   
