@@ -98,7 +98,7 @@ struct FlagImage: View {
 3. And if you tap on the wrong flag? Well, that’s down to you – get creative!
 #+END_QUOTE
 
-1. I'm using an array of Boolean values to manage the state of the animation.
+*** 1. I'm using an array of Boolean values to manage the state of the animation.
 #+BEGIN_SRC Swift
 // Challenge #1
 @State private var isFlipAnimated: [Bool] = [false, false, false]
@@ -129,5 +129,6 @@ And finally - when a new round starts, I revert back to false values for all 3 b
 isFlipAnimated = [false, false, false]
 #+END_SRC
 
-2. A similar solution to make the other 2 buttons opaque, but I'm tracking the state in a different array.
-3. For free, I've decided to hide the incorrect flags and leave the correct answer to be displayed.
+*** 2. A similar solution to make the other 2 buttons opaque, but I'm tracking the state in a different array.
+*** 3. For free, I've decided to hide the incorrect flags and leave the correct answer to be displayed.
+   
