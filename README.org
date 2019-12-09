@@ -134,4 +134,17 @@ isFlipAnimated = [false, false, false]
 Again, I'm using a third @State variable to track the required state. And if the wrong flag is selected, the two incorrect flags are going to be updated with the .opacity view modifier.
 #+BEGIN_SRC Swift
 .opacity(self.isOpacityAnimated[number] ? (self.isWrongAnswer ? 0 : 0.25) : 1)
-#+END_SRC   
+#+END_SRC  
+** Day 75 - Accessibility
+We will provide a custom label for each flag image/button - describing the aspect of the flag.
+We will store these descriptions in a dictionary:
+#+BEGIN_SRC Swift
+let labels = [
+    "Estonia": "Flag with three horizontal stripes of equal size. Top stripe blue, middle stripe black, bottom stripe white",
+...
+]
+
+...
+
+.accessibility(label: Text(self.labels[self.countries[number], default: "Unknown flag"])) 
+#+END_SRC 
